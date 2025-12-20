@@ -21,4 +21,4 @@ SocketsConnect="*res://addons/godotPlugin/SocketsConnect.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godotPlugin/plugin.cfg", "res://addons/test/plugin.cfg")
+enabled=PackedStringArray("res://addons/godotPlugin/plugin.cfg")
