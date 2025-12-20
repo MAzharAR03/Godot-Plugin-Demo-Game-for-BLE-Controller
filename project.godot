@@ -1,0 +1,24 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="my_game2"
+run/main_scene="uid://cy3jrreqd3mb8"
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+SocketsConnect="*res://addons/godotPlugin/SocketsConnect.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godotPlugin/plugin.cfg", "res://addons/test/plugin.cfg")

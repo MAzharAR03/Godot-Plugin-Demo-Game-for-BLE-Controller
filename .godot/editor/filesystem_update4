@@ -1,0 +1,3 @@
+res://Scenes/main.tscn
+res://addons/godotPlugin/SocketsConnect.gd
+res://addons/godotPlugin/bleGCPlugin.gd
