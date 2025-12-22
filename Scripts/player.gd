@@ -2,6 +2,9 @@ extends CharacterBody3D
 
 @onready var head: Node3D = $head
 @onready var camera_3d: Camera3D = $head/Camera3D
+var bullet = load("res://Scenes/bullet.tscn")
+@onready var pos: Node3D = $head/Camera3D/gun/pos
+
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -46,5 +49,10 @@ func handle_step() -> void:
 	print("Step!")
 
 func handle_button() -> void:
-	print("Button")
+	var instance=bullet.instantiate()
+	instance.position = pos.global_position
+	instance.transform.basis = pos.global_transform.basis
+	get_parent().add_child(instance)
+	print("Fire")
+	
 	
