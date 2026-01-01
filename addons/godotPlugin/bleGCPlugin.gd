@@ -2,7 +2,6 @@
 extends EditorPlugin
 
 const AUTOLOAD_NAME = "SocketsConnect"
-
 func _enable_plugin() -> void:
 	print("Plugin Enabled")
 	add_autoload_singleton(AUTOLOAD_NAME,"res://addons/godotPlugin/SocketsConnect.gd")

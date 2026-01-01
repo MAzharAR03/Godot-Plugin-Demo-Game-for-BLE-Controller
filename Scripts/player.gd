@@ -8,8 +8,9 @@ var bullet = load("res://Scenes/bullet.tscn")
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-const CAMERA_SENS = 0.4
+const CAMERA_SENS = 0.2
 const STEP_DURATION = 0.5
+const THRESHOLD = 0.05
 
 var steppingTimer = 0.0
 
@@ -42,7 +43,8 @@ func _physics_process(delta: float) -> void:
 
 
 func handle_tilt() -> void:
-	rotate_y(SocketsConnect.getCurrentTilt() * CAMERA_SENS)
+	if(abs(SocketsConnect.getCurrentTilt())>THRESHOLD):
+		rotate_y(SocketsConnect.getCurrentTilt() * CAMERA_SENS)
 
 func handle_step() -> void:
 	steppingTimer = STEP_DURATION

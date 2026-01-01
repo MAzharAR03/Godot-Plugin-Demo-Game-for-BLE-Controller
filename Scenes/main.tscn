@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy3jrreqd3mb8"]
+[gd_scene load_steps=11 format=3 uid="uid://cy3jrreqd3mb8"]
 
 [ext_resource type="Script" uid="uid://cah7n3uwr8l10" path="res://Scripts/player.gd" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://8p4ggmjvcykh" path="res://Scripts/north_box.gd" id="2_bo1nx"]
@@ -22,6 +22,9 @@ background_mode = 2
 sky = SubResource("Sky_jjgbg")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bo1nx"]
+albedo_color = Color(0.44313726, 1, 0.69803923, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjgbg"]
 albedo_color = Color(0, 1, 1, 1)
@@ -63,40 +66,21 @@ shadow_enabled = true
 [node name="Stage" type="Node3D" parent="."]
 
 [node name="floor" type="CSGBox3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 4.8)
 use_collision = true
-size = Vector3(20, 1, 20)
-
-[node name="wallEast" type="CSGBox3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
-use_collision = true
-size = Vector3(1, 2, 20)
-
-[node name="wallWest" type="CSGBox3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 0)
-use_collision = true
-size = Vector3(1, 2, 20)
-
-[node name="wallNorth" type="CSGBox3D" parent="Stage"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.051333427, 0, -9.454872)
-use_collision = true
-size = Vector3(1, 2, 20)
-
-[node name="wallSouth" type="CSGBox3D" parent="Stage"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 10)
-use_collision = true
-size = Vector3(1, 2, 20)
+size = Vector3(200, 1, 200)
+material = SubResource("StandardMaterial3D_bo1nx")
 
 [node name="Box" type="Node3D" parent="Stage"]
 
 [node name="NorthBox" type="CSGBox3D" parent="Stage/Box"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1.795, -7.57)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4, 1.795, -7.57)
 use_collision = true
 material = SubResource("StandardMaterial3D_jjgbg")
 script = ExtResource("2_bo1nx")
 
 [node name="NorthBox2" type="CSGBox3D" parent="Stage/Box"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.795, -7.6800003)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3, 1.795, -7.6800003)
 use_collision = true
 material = SubResource("StandardMaterial3D_jjgbg")
 script = ExtResource("2_bo1nx")
