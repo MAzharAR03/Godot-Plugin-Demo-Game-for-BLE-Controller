@@ -1,4 +1,2 @@
-res://Scenes/control.tscn
-res://addons/godotPlugin/Test.json
 res://Scenes/main.tscn
-res://addons/godotPlugin/SocketsConnect.gd
+res://addons/godotPlugin/Test.json
