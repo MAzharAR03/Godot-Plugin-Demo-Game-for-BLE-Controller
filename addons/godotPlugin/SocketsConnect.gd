@@ -56,4 +56,8 @@ func isStepping() -> bool:
 
 func setStepping(value: bool) -> void:
 	stepping = value
-	
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_F5:  # Press F5 to send file
+			sendfile("res://addons/godotPlugin/Test.json")
