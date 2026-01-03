@@ -24,9 +24,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	socket.poll()
 	if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
-		if(!fileSent):
-			sendfile("res://addons/godotPlugin/Test.json")
-			fileSent = true
 		while socket.get_available_packet_count():
 			handle_input(socket.get_packet().get_string_from_ascii())
 			#print("Recv. >", socket.get_packet().get_string_from_ascii(),"<")
@@ -36,6 +33,7 @@ func sendfile(filename: String) -> void:
 	socket.send_text(json_text)
 	
 func handle_input(data: String) -> void:
+	print("Test")
 	var split_string = data.split(":")
 	if(split_string[0] == "Tilt"):
 		current_tilt = split_string[1].to_float()
