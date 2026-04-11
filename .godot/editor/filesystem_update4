@@ -1,2 +1,2 @@
-res://Scenes/main.tscn
 res://addons/godotPlugin/SocketsConnect.gd
+res://Scripts/player.gd

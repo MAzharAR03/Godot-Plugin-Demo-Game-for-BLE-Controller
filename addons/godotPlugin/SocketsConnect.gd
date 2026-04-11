@@ -5,12 +5,9 @@ var websocket_url = "ws://localhost:9999"
 var socket := WebSocketPeer.new()
 var fileSent := false
 
-signal step_received
-signal button_pressed
-signal tilt_received
-
-var current_tilt := 0.0
-var stepping = false
+var _stepping = false
+var _pitch = 0.0
+var _buttons = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,27 +30,39 @@ func sendfile(filename: String) -> void:
 	socket.send_text(json_text)
 	
 func handle_input(data: String) -> void:
-	print("Test")
-	var split_string = data.split(":")
-	if(split_string[0] == "Tilt"):
-		current_tilt = split_string[1].to_float()
-		tilt_received.emit()
-	elif(split_string[0] == "Step"):
-		stepping = true
-		step_received.emit()
-	elif(split_string[0] == "Button"):
-		button_pressed.emit()
-	else:
-		print("Unknown input")
+	var json = JSON.new()
+	var err = json.parse(data)
+	if err != OK:
+		print("JSON parse error")
+		return
+	
+	var payload = json.get_data()
+	if typeof(payload) != TYPE_DICTIONARY:
+		print("Unexpected Structure")
+		return
 		
-func getCurrentTilt() -> float:
-	return current_tilt
+	if payload.has("stepping"):
+		_stepping = payload["stepping"]
+		
+	if payload.has("pitch"):
+		_pitch = payload["pitch"]
+		
+	if payload.has("buttons") and typeof(payload["buttons"]) == TYPE_ARRAY:
+		for button in payload["buttons"]:
+			_buttons[button["name"]] = button["pressed"]
+			
+		
+func getCurrentPitch() -> float:
+	return _pitch
 	
 func isStepping() -> bool:
-	return stepping
+	return _stepping
 
-func setStepping(value: bool) -> void:
-	stepping = value
+func isButtonPressed(button_name: String) -> bool:
+	return _buttons.get(button_name, false)
+
+func getButtons() -> Dictionary:
+	return _buttons.duplicate()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
