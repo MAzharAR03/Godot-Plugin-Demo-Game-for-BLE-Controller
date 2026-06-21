@@ -15,7 +15,10 @@ const THRESHOLD = 0.05
 var steppingTimer = 0.0
 
 func _ready() -> void:
-	pass
+	SocketsConnect.take_control()
+
+func _exit_tree() -> void:
+	SocketsConnect.release_control()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -34,6 +37,10 @@ func _physics_process(delta: float) -> void:
 	
 	if(abs(SocketsConnect.getCurrentPitch())>THRESHOLD):
 		rotate_y(SocketsConnect.getCurrentPitch() * CAMERA_SENS)
+	
+	if (abs(SocketsConnect.getCurrentRoll())>THRESHOLD):
+		head.rotate_x(-SocketsConnect.getCurrentRoll() * CAMERA_SENS)
+		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 		
 	if SocketsConnect.isButtonPressed("X"):
 		var instance=bullet.instantiate()
