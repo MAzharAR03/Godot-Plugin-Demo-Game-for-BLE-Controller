@@ -13,6 +13,7 @@ signal pause_received
 signal screenshot_received
 signal photo_ready(jpeg_base64: String, has_gps: bool)
 signal gpx_ready(gpx_xml: String)
+signal step_detected
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -113,6 +114,9 @@ func handle_message(data: String ) -> void:
 		pause_received.emit()
 	elif msg_type == "screenshot":
 		screenshot_received.emit()
+	elif msg_type == "step":
+		step_detected.emit()
+		return
 		
 func handle_input(payload: Dictionary) -> void:
 	if payload.has("stepping"):
